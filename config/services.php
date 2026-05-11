@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'openrouter' => [
+        'api_key' => env('OPENROUTER_API_KEY'),
+        'base_url' => env('OPENROUTER_BASE_URL', 'https://openrouter.ai/api/v1'),
+        'title' => env('OPENROUTER_API_TITLE', env('APP_NAME')),
+        'referer' => env('OPENROUTER_API_REFERER'),
+    ],
+
 ];

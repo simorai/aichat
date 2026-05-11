@@ -19,6 +19,7 @@ class OpenRouterService
         $response = Http::baseUrl((string) config('services.openrouter.base_url'))
             ->acceptJson()
             ->withToken($this->resolveApiKey())
+            ->withHeaders($this->requestHeaders())
             ->timeout(30)
             ->get('/models');
 
@@ -86,7 +87,7 @@ class OpenRouterService
         try {
             $response = Http::baseUrl((string) config('services.openrouter.base_url'))
                 ->withToken((string) $this->resolveApiKey())
-                ->withHeaders(['Accept' => 'text/event-stream'])
+                ->withHeaders($this->requestHeaders(['Accept' => 'text/event-stream']))
                 ->withOptions(['stream' => true])
                 ->timeout(120)
                 ->connectTimeout(30)
@@ -191,5 +192,28 @@ class OpenRouterService
     protected function resolveApiKey(): ?string
     {
         return config('services.openrouter.api_key');
+    }
+
+    /**
+     * Build shared outbound OpenRouter headers.
+     *
+     * @param array<string, string> $overrides
+     * @return array<string, string>
+     */
+    protected function requestHeaders(array $overrides = []): array
+    {
+        $headers = $overrides;
+
+        $referer = config('services.openrouter.referer');
+        if (is_string($referer) && trim($referer) !== '') {
+            $headers['HTTP-Referer'] = trim($referer);
+        }
+
+        $title = config('services.openrouter.title');
+        if (is_string($title) && trim($title) !== '') {
+            $headers['X-Title'] = trim($title);
+        }
+
+        return $headers;
     }
 }

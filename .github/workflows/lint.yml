@@ -26,7 +26,10 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: '8.3'
+
+      - name: Validate Composer files
+        run: composer validate --strict
 
       - name: Install Dependencies
         run: |

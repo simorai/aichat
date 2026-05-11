@@ -7,9 +7,15 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use RuntimeException;
 
 class ConversationService
 {
+    public function __construct(
+        protected readonly OpenRouterService $openRouterService,
+    ) {
+    }
+
     /**
      * Get paginated conversations for the authenticated user.
      */
@@ -136,6 +142,39 @@ class ConversationService
     public function markMessageAsError(Message $message): void
     {
         $message->forceFill(['status' => 'error'])->save();
+    }
+
+    /**
+     * Stream assistant content, persist the final assistant message, and report lifecycle callbacks.
+     *
+     * @param array<string, mixed> $payload
+     * @param callable(string):void $onChunk
+     * @param callable(int):void    $onDone
+     * @param callable(string):void $onError
+     */
+    public function streamAssistantResponse(
+        Conversation $conversation,
+        array $payload,
+        string $model,
+        Message $userMessage,
+        callable $onChunk,
+        callable $onDone,
+        callable $onError,
+    ): void {
+        try {
+            $assembled = $this->openRouterService->streamChatCompletion($payload, $onChunk);
+
+            $assistantMessage = $this->storeAssistantMessage(
+                $conversation,
+                $assembled,
+                $model,
+            );
+
+            $onDone($assistantMessage->id);
+        } catch (RuntimeException $exception) {
+            $this->markMessageAsError($userMessage);
+            $onError($exception->getMessage());
+        }
     }
 
     /**
