@@ -145,6 +145,18 @@ class ConversationService
     }
 
     /**
+     * Delete a conversation for the authenticated user.
+     * Validates ownership before deletion. Messages cascade delete via foreign key constraint.
+     *
+     * @throws AuthorizationException
+     */
+    public function deleteForUser(User $user, Conversation $conversation): void
+    {
+        $this->assertOwnership($user, $conversation);
+        $conversation->delete();
+    }
+
+    /**
      * Stream assistant content, persist the final assistant message, and report lifecycle callbacks.
      *
      * @param array<string, mixed> $payload

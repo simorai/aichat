@@ -87,6 +87,98 @@
             'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
             'Noto Color Emoji';
     }
+
+    /* .chat-frame {
+        box-shadow:
+            0 6px 16px rgb(15 23 42 / 0.12),
+            0 1px 2px rgb(15 23 42 / 0.08),
+            0 0 0 1px rgb(15 23 42 / 0.1);
+    } */
+
+    .chat-frame {
+        box-shadow:
+            0 6px 16px rgb(15 23 42 / 0.12),
+            0 1px 2px rgb(15 23 42 / 0.08),
+            0 0 0 1px rgb(15 23 42 / 0.12);
+    }
+
+    .dark .chat-frame {
+        box-shadow:
+            0 8px 20px rgb(0 0 0 / 0.45),
+            0 1px 2px rgb(0 0 0 / 0.4),
+            0 0 0 1px rgb(255 255 255 / 0.14);
+    }
+
+    .assistant-bubble {
+        border: 1px solid var(--border);
+        background: var(--card);
+        box-shadow: 0 1px 2px rgb(15 23 42 / 0.08);
+    }
+
+    .dark .assistant-bubble {
+        border-color: rgb(255 255 255 / 0.16);
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.32);
+    }
+
+    /* Conversation list item: subtle bg with shadow for visual separation between items */
+    .conversation-item {
+        background: rgba(255 255 255 / 0.6);
+        box-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
+        margin-bottom: 0.25rem;
+        margin-top: 0.25rem;
+    }
+
+    /* Conversation item hover state: slightly elevated with more shadow */
+    .conversation-item:hover {
+        box-shadow: 0 2px 4px rgb(15 23 42 / 0.1);
+    }
+
+    /* Conversation item active state: distinct color and shadow when selected */
+    .conversation-item-active {
+        background: rgba(59 130 246 / 0.1);
+        box-shadow: 0 2px 6px rgb(59 130 246 / 0.15);
+        border-left: 3px solid rgb(59 130 246 / 0.8);
+    }
+
+    .dark .conversation-item {
+        background: rgba(255 255 255 / 0.05);
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.2);
+    }
+
+    .dark .conversation-item:hover {
+        box-shadow: 0 2px 4px rgb(0 0 0 / 0.3);
+    }
+
+    .dark .conversation-item-active {
+        background: rgba(59 130 246 / 0.15);
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.3);
+        border-left: 3px solid rgb(59 130 246 / 0.6);
+    }
+
+    /* Search input: styled with subtle border and shadow, and background color for visibility */
+    .search-input {
+        background: rgba(255 255 255 / 0.8);
+        border: 1px solid rgb(15 23 42 / 0.12);
+        box-shadow: inset 0 1px 2px rgb(15 23 42 / 0.04);
+    }
+
+    .search-input:focus {
+        box-shadow:
+            inset 0 1px 2px rgb(15 23 42 / 0.04),
+            0 0 0 3px rgb(59 130 246 / 0.1);
+    }
+
+    .dark .search-input {
+        background: rgba(255 255 255 / 0.08);
+        border-color: rgb(255 255 255 / 0.12);
+        box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.2);
+    }
+
+    .dark .search-input:focus {
+        box-shadow:
+            inset 0 1px 2px rgb(0 0 0 / 0.2),
+            0 0 0 3px rgb(59 130 246 / 0.15);
+    }
 }
 
 :root {
@@ -115,7 +207,7 @@
     --chart-4: hsl(43 74% 66%);
     --chart-5: hsl(27 87% 67%);
     --radius: 0.5rem;
-    --sidebar-background: hsl(0 0% 98%);
+    --sidebar-background: #ebf2fa;
     --sidebar-foreground: hsl(240 5.3% 26.1%);
     --sidebar-primary: hsl(0 0% 10%);
     --sidebar-primary-foreground: hsl(0 0% 98%);
@@ -123,7 +215,7 @@
     --sidebar-accent-foreground: hsl(0 0% 30%);
     --sidebar-border: hsl(0 0% 91%);
     --sidebar-ring: hsl(217.2 91.2% 59.8%);
-    --sidebar: hsl(0 0% 98%);
+    --sidebar: #ebf2fa;
 }
 
 .dark {
