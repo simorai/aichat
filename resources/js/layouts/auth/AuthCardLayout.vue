@@ -9,13 +9,11 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { home } from '@/routes';
-
 defineProps<{
     title?: string;
     description?: string;
 }>();
 </script>
-
 <template>
     <div
         class="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10"
@@ -31,7 +29,6 @@ defineProps<{
                     />
                 </div>
             </Link>
-
             <div class="flex flex-col gap-6">
                 <Card class="rounded-xl">
                     <CardHeader class="px-10 pt-8 pb-0 text-center">
