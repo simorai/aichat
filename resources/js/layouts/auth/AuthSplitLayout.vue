@@ -2,16 +2,13 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { home } from '@/routes';
-
 const page = usePage();
 const name = page.props.name;
-
 defineProps<{
     title?: string;
     description?: string;
 }>();
 </script>
-
 <template>
     <div
         class="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0"
